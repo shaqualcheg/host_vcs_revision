@@ -1,6 +1,6 @@
 #!/usr/bin/python
-import re, json, paramiko
-f = open("connect_list.txt", "r")
+import re, json, paramiko, sys
+f = open(sys.argv(1), "r")
 connections = []
 results = []
 conn_params = re.sub(r'\[|\]', '', f.read().replace('},', '};').strip()).split(';')
