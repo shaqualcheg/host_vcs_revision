@@ -15,16 +15,16 @@ for connection in connections:
   ssh_stdin, ssh_stdout, ssh_stderr = client.exec_command("cd bw/ && git branch")
   if (ssh_stderr is None):
      vcs_type = "git"
-     vcs_branch = ssh_stdout
+     vcs_branch = ssh_stdout.read()
      ssh_stdin, ssh_stdout, ssh_stderr = client.exec_command("cd bw/ && git log | head -1 | awk '{print $0}'")
-     vcs_revision = ssh_stdout
+     vcs_revision = ssh_stdout.read()
   else:
     vcs_type = "svn"
     ssh_stdin, ssh_stdout, ssh_stderr = client.exec_command("cd bw/ && svn info | grep '^URL:' | egrep -o '(tags|branches)/[^/]+|trunk' | egrep -o '[^/]+$'")
-    vcs_branch = ssh_stdout
+    vcs_branch = ssh_stdout.read()
     ssh_stdin, ssh_stdout, ssh_stderr = client.exec_command("cd bw/ && svn info | grep Revision | awk '{print $1}'")
-    vcs_revision = ssh_stdout
-  if (client.key_filename is None):
+    vcs_revision = ssh_stdout.read()
+  if (client.ssh.get_host_keys() is None):
     auth_method = "password"
   else:
     auth_method = "certificate"
