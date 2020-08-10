@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import re, json, paramiko, sys
-file = sys.argv(1)
+file = sys.argv[1]
 f = open(file, "r")
 connections = []
 results = []
