@@ -24,7 +24,7 @@ for connection in connections:
     vcs_branch = ssh_stdout.read()
     ssh_stdin, ssh_stdout, ssh_stderr = client.exec_command("cd bw/ && svn info | grep Revision | awk '{print $1}'")
     vcs_revision = ssh_stdout.read()
-  if (client.ssh.get_host_keys() is None):
+  if (client.get_host_keys() is None):
     auth_method = "password"
   else:
     auth_method = "certificate"
