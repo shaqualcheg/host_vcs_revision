@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import re, json, paramiko, sys
-f = open(sys.argv(1), "r")
+file = sys.argv(1)
+f = open(file, "r")
 connections = []
 results = []
 conn_params = re.sub(r'\[|\]', '', f.read().replace('},', '};').strip()).split(';')
